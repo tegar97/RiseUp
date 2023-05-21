@@ -24,7 +24,7 @@ export default function Navbar() {
               href="#"
               className="flex items-center flex-shrink-0 text-white mr-6 text-md "
             >
-              Causes
+              Funding
             </a>
           </li>
           <li>

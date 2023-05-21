@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Navbar from "./component/navbar";
 import FundingCard from "./component/funding_card";
+import ProgressCard from "./component/progress_card";
 
 export default function Home() {
   return (
@@ -52,42 +53,17 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="progress flex flex-col gap-10 items-center ">
-          <h2 className="text-4xl font-semibold text-center  costume-line-height-header mb-20">
-            We made <br></br>{" "}
-            <span className="text-primary-color ">Big progress</span>
+        <div className="progress flex flex-col gap-10 items-center">
+          <h2 className="text-4xl font-semibold text-center costume-line-height-header mb-20">
+            We made <br />
+            <span className="text-primary-color">Big progress</span>
           </h2>
-          <div className="grid grid-cols-5 gap-20 text-center ">
-            <div className="flex flex-col gap-2">
-              <h3 className="text-5xl font-bold text-white ">
-                500<span className="text-primary-color">M</span>
-              </h3>
-              <span className="text-md font-light">Total Causes</span>
-            </div>
-            <div className="flex flex-col gap-2">
-              <h3 className="text-5xl font-bold text-white ">
-                $19<span className="text-primary-color">B</span>
-              </h3>
-              <span className="text-md font-light">Total Donation</span>
-            </div>
-            <div className="flex flex-col gap-2">
-              <h3 className="text-5xl font-bold text-white ">
-                420<span className="text-primary-color">K</span>
-              </h3>
-              <span className="text-md font-light">Donator</span>
-            </div>
-            <div className="flex flex-col gap-2">
-              <h3 className="text-5xl font-bold text-white ">
-                3<span className="text-primary-color">K</span>
-              </h3>
-              <span className="text-md font-light">Global Countries</span>
-            </div>
-            <div className="flex flex-col gap-2">
-              <h3 className="text-5xl font-bold text-white ">
-                113<span className="text-primary-color">K</span>
-              </h3>
-              <span className="text-md font-light">Global Companies</span>
-            </div>
+          <div className="grid grid-cols-5 gap-20 text-center">
+            <ProgressCard value={500} unit="M" label="Total Causes" />
+            <ProgressCard value={19} unit="B" label="Total Donation" />
+            <ProgressCard value={420} unit="K" label="Donator" />
+            <ProgressCard value={3} unit="K" label="Global Countries" />
+            <ProgressCard value={113} unit="K" label="Global Companies" />
           </div>
         </div>
         <div className="grid grid-cols-3 gap-3 w-full">
