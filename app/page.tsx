@@ -2,6 +2,9 @@ import Image from "next/image";
 import Navbar from "./component/navbar";
 import FundingCard from "./component/funding_card";
 import ProgressCard from "./component/progress_card";
+import SwiperComponent from "./component/donatioon_list";
+
+
 
 export default function Home() {
   return (
@@ -28,6 +31,7 @@ export default function Home() {
               Explore Now
             </button>
           </div>
+        <SwiperComponent/>
         </div>
         <div className="grid grid-cols-5  justify-items-center items-center ">
           <Image src="/sponsor1.png" alt="logo" width={91} height={30} />

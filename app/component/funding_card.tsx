@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 interface FundingCardProps {
@@ -33,9 +34,13 @@ const FundingCard: React.FC<FundingCardProps> = ({
         <div className="funding-progress">
           <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-primary-color">
             <div className="bg-gray-200 rounded-full h-2 w-full">
-                          <div className="bg-primary-color rounded-full h-2 " style={{
-                width: `${progress}%`
-              }}></div>
+              <div
+                className="bg-primary-color rounded-full h-2"
+                style={{
+                  width: `${progress}%`,
+                  transition: "width 0.5s ease-in-out", // Menambahkan animasi transisi
+                }}
+              ></div>
             </div>
           </div>
           <div className="flex justify-between text-black">
@@ -44,18 +49,20 @@ const FundingCard: React.FC<FundingCardProps> = ({
           </div>
         </div>
         <div className="mt-5">
-          <button
-            className="bg-primary-color text-black rounded-lg  font-semibold py-3 px-8 border  mt-5 w-full"
-            style={{
-              borderRadius: "50px",
-            }}
-          >
-            Funding now
-          </button>
+          <Link href="/funding/1">
+            <button
+              className="bg-primary-color text-black rounded-lg  font-semibold py-3 px-8 border  mt-5 w-full"
+              style={{
+                borderRadius: "50px",
+              }}
+            >
+              Funding now
+            </button>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default FundingCard;
+export default FundingCard; 

@@ -50,3 +50,57 @@ line-height: 55px;}
   background-color: rgba(0, 0, 0, 0.5); /* Ubah nilai alpha (0.5) sesuai kebutuhan */
   z-index: 1;
 }
+.swiper {
+  width: 240px;
+  height: 320px;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.swiper-slide:nth-child(1n) {
+  background-color: #fff;
+}
+
+.swiper-slide:nth-child(2n) {
+    background-color: #fff;
+}
+
+.swiper-slide:nth-child(3n) {
+  background-color: #fff;
+}
+
+.swiper-slide:nth-child(4n) {
+    background-color: #fff;
+}
+
+.swiper-slide:nth-child(5n) {
+   background-color: #fff;
+}
+
+.swiper-slide:nth-child(6n) {
+    background-color: #fff;
+}
+
+.swiper-slide:nth-child(7n) {
+   background-color: #fff;
+}
+
+.swiper-slide:nth-child(8n) {
+    background-color: #fff;
+}
+
+.swiper-slide:nth-child(9n) {
+   background-color: #fff;
+}
+
+.swiper-slide:nth-child(10n) {
+    background-color: #fff;
+}
