@@ -99,7 +99,7 @@ function page() {
           </div>
         </div>
         <div className=" mt-14 px-24  w-1/2 ">
-          <h2 className="text-white font-semibold  text-4xl costume-line-height-header-2 mb-4  ">
+          <h2 className="text-white font-semibold  text-4xl costume-line-height-header-2 mb-4     ">
             Donate For <br></br>{" "}
             <span className="text-primary-color">UKM X</span>
           </h2>

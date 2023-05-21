@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Navbar from "./component/navbar";
+import FundingCard from "./component/funding_card";
 
 export default function Home() {
   return (
@@ -42,45 +43,13 @@ export default function Home() {
           </h2>
 
           <div className=" grid grid-cols-3 gap-5">
-            <div className="bg-white rounded-lg">
-              <Image
-                src="/dummy.jpg"
-                alt="logo"
-                width={405}
-                height={100}
-                className="rounded-t-lg h-60 object-cover"
-              />
-              <div className="p-5">
-                <h3 className="text-2xl mb-4 text-black font-bold">
-                  Helping Children
-                </h3>
-                <p className="text-md font-light mb-5 text-black">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
-                <div className="funding-progress">
-                  <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-primary-color">
-                    <div
-                      style={{ width: "30%" }}
-                      className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-secondary-color"
-                    ></div>
-                  </div>
-                  <div className="flex justify-between text-black">
-                    <span>45% </span>
-                    <span>$ 30,000</span>
-                  </div>
-                </div>
-                <div className="mt-5">
-                  <button
-                    className="bg-primary-color text-black rounded-lg  font-semibold py-3 px-8 border  mt-5 w-full"
-                    style={{
-                      borderRadius: "50px", 
-                    }}
-                  >
-                    Funding now
-                  </button>
-                </div>
-              </div>
-            </div>
+            <FundingCard
+              title="Helping Children"
+              imageSrc="/dummy.jpg"
+              imageAlt="logo"
+              progress={30}
+              fundingAmount="30,000"
+            />
           </div>
         </div>
         <div className="progress flex flex-col gap-10 items-center ">
@@ -122,13 +91,13 @@ export default function Home() {
           </div>
         </div>
         <div className="grid grid-cols-3 gap-3 w-full">
-            <Image
-              src="/dummy1.png"
-              alt="logo"
-              width={641}
-              height={500}
-              className="w-full col-span-2 rounded-2xl "
-            />
+          <Image
+            src="/dummy1.png"
+            alt="logo"
+            width={641}
+            height={500}
+            className="w-full col-span-2 rounded-2xl "
+          />
 
           <div className="w-full flex flex-col gap-6">
             <Image

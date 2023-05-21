@@ -1,12 +1,13 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 export default function Navbar() {
   return (
     <nav className="flex justify-between flex-wrap  w-full  px-24 py-10">
       <div>
-        <a href="#" className="flex items-center flex-shrink-0 text-white mr-6">
+        <Link href="/" className="flex items-center flex-shrink-0 text-white mr-6">
           <Image src="/logo.png" alt="logo" width={188} height={40} />
-        </a>
+        </Link>
       </div>
       <div>
         <ul className="flex flex-row gap-5">
