@@ -10,7 +10,7 @@ function page() {
       <main className="flex min-h-screen flex-col   px-48 py-24">
         <div className="w-full max-h-screen relative">
           <Image
-            src="/dummy.jpg"
+            imageSrc="/image_gallery1.jpg"
             alt="logo"
             width={405}
             height={100}
@@ -103,7 +103,7 @@ function page() {
             Donate For <br></br>{" "}
             <span className="text-primary-color">UKM X</span>
           </h2>
-          <span >
+          <span>
             Lorem donate help people life easier ipsum than heaven granted for
             anyone who trying to help others
           </span>

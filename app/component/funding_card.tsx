@@ -24,7 +24,7 @@ const FundingCard: React.FC<FundingCardProps> = ({
         alt={imageAlt}
         width={405}
         height={100}
-        className="rounded-t-lg h-60 object-cover"
+        className="rounded-t-lg h-60 object-cover w-full"
       />
       <div className="p-5">
         <h3 className="text-2xl mb-4 text-black font-bold">{title}</h3>
@@ -45,7 +45,7 @@ const FundingCard: React.FC<FundingCardProps> = ({
           </div>
           <div className="flex justify-between text-black">
             <span>{progress}% </span>
-            <span>$ {fundingAmount}</span>
+            <span>Rp {fundingAmount}</span>
           </div>
         </div>
         <div className="mt-5">

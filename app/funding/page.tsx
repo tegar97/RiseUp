@@ -80,11 +80,11 @@ function page() {
 
         <div className="grid grid-cols-3 w-full">
           <FundingCard
-            title="Helping Children"
-            imageSrc="/dummy.jpg"
+            title="UKM Kreatif Indah"
+            imageSrc="/image_gallery1.jpg"
             imageAlt="logo"
             progress={30}
-            fundingAmount="30,000"
+            fundingAmount="1.250.000"
           />
         </div>
       </main>

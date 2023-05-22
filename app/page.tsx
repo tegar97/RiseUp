@@ -3,6 +3,7 @@ import Navbar from "./component/navbar";
 import FundingCard from "./component/funding_card";
 import ProgressCard from "./component/progress_card";
 import SwiperComponent from "./component/donatioon_list";
+import FAQ from "./component/faq";
 
 
 
@@ -11,8 +12,8 @@ export default function Home() {
     <>
       <Navbar />
 
-      <main className="flex min-h-screen flex-col  gap-40 px-48 py-24">
-        <div className="hero grid grid-cols-2 gap-5">
+      <main className="flex min-h-screen flex-col  md:gap-40 md:px-48  py-24 px-8 gap-20 ">
+        <div className="hero grid grid-cols-1 md:grid-cols-2 gap-20 md:justify-between">
           <div className="hero-text ">
             <h1 className="text-6xl font-bold mb-5 tracking-wide	 costume-line-height 	 ">
               <span className="text-primary-color 	">Be Kind.</span> <br></br>
@@ -31,14 +32,24 @@ export default function Home() {
               Explore Now
             </button>
           </div>
-        <SwiperComponent/>
+          <SwiperComponent />
         </div>
-        <div className="grid grid-cols-5  justify-items-center items-center ">
-          <Image src="/sponsor1.png" alt="logo" width={91} height={30} />
-          <Image src="/sponsor2.png" alt="logo" width={91} height={30} />
-          <Image src="/sponsor3.png" alt="logo" width={91} height={30} />
-          <Image src="/sponsor4.png" alt="logo" width={91} height={30} />
-          <Image src="/sponsor5.png" alt="logo" width={91} height={30} />
+        <div className="grid grid-cols-2 md:grid-cols-5 justify-center  justify-items-center items-center md:gap-0 gap-10">
+          <div className="col-span-1 md:col-span-auto">
+            <Image src="/sponsor1.png" alt="logo" width={91} height={30} />
+          </div>
+          <div className="col-span-1 md:col-span-auto">
+            <Image src="/sponsor2.png" alt="logo" width={91} height={30} />
+          </div>
+          <div className="col-span-1 md:col-span-auto">
+            <Image src="/sponsor3.png" alt="logo" width={91} height={30} />
+          </div>
+          <div className="col-span-1 md:col-span-auto">
+            <Image src="/sponsor4.png" alt="logo" width={91} height={30} />
+          </div>
+          <div className="col-span-1 md:col-span-auto">
+            <Image src="/sponsor5.png" alt="logo" width={91} height={30} />
+          </div>
         </div>
 
         <div>
@@ -47,13 +58,13 @@ export default function Home() {
             <span className="text-primary-color ">Funding Now </span>
           </h2>
 
-          <div className=" grid grid-cols-3 gap-5">
+          <div className=" grid grid-cols-1 md:grid-cols-3 gap-5">
             <FundingCard
-              title="Helping Children"
-              imageSrc="/dummy.jpg"
+              title="UKM Kreatif Indah"
+              imageSrc="/image_gallery1.jpg"
               imageAlt="logo"
               progress={30}
-              fundingAmount="30,000"
+              fundingAmount="1.250.000"
             />
           </div>
         </div>
@@ -62,7 +73,7 @@ export default function Home() {
             We made <br />
             <span className="text-primary-color">Big progress</span>
           </h2>
-          <div className="grid grid-cols-5 gap-20 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-20 text-center">
             <ProgressCard value={500} unit="M" label="Total Causes" />
             <ProgressCard value={19} unit="B" label="Total Donation" />
             <ProgressCard value={420} unit="K" label="Donator" />
@@ -72,7 +83,7 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-3 gap-3 w-full">
           <Image
-            src="/dummy1.png"
+            src="/image_gallery1.jpg"
             alt="logo"
             width={641}
             height={500}
@@ -81,20 +92,30 @@ export default function Home() {
 
           <div className="w-full flex flex-col gap-6">
             <Image
-              src="/dummy.jpg"
+              src="/image_gallery2.jpg"
               alt="logo"
               width={405}
               height={180}
               className="rounded-xl h-full"
             />
             <Image
-              src="/dummy3.png"
+              src="/image_gallery3.jpeg"
               alt="logo"
               width={405}
               height={247.5}
               className="rounded-xl h-full"
             />
           </div>
+        </div>
+        <div>
+          <h2 className="text-4xl font-semibold text-center costume-line-height-header mb-20">
+            Frequently Asked Questions
+            <br />
+            <span className="text-primary-color">
+              Find useful information for you question
+            </span>
+          </h2>
+          <FAQ />
         </div>
       </main>
     </>

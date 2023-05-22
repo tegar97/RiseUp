@@ -9,14 +9,14 @@ export default function Navbar() {
      setIsMenuOpen(!isMenuOpen);
    };
   return (
-    <nav className="flex md:flex-row flex-col justify-between items-center w-full px-4 py-10 md:px-24">
-      <div className="flex flex-row justify-between md:w-auto w-full" >
+    <nav className="flex md:flex-row flex-col justify-between items-center w-full px-8 py-8 md:py-10 md:px-24 ">
+      <div className="flex flex-row justify-between md:w-auto w-full">
         <div>
           <Link
             href="/"
             className="flex items-center flex-shrink-0 text-white mr-6"
           >
-            <Image src="/logo.png" alt="logo" width={188} height={40} />
+            <Image src="/riseup.png" alt="logo" width={188} height={40} />
           </Link>
         </div>
         <div className="md:hidden">
@@ -51,7 +51,7 @@ export default function Navbar() {
           isMenuOpen ? "block" : "hidden"
         } md:flex flex-col md:flex-row md:items-center md:justify-end w-full md:w-auto`}
       >
-        <ul className="md:flex flex-row gap-5">
+        <ul className="md:flex md:flex-row md:gap-5 gap-3 flex flex-col md:mt-0 mt-10">
           <li>
             <a
               href="#"
@@ -91,6 +91,20 @@ export default function Navbar() {
             >
               Investors
             </a>
+          </li>
+          <li className="md:hidden">
+            <Link href={"/login"}>
+              <button className="bg-transparent hover:bg-primary-color text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded">
+                Login
+              </button>
+            </Link>
+          </li>
+          <li className="md:hidden">
+            <Link href={"/register"}>
+              <button className=" hover:bg-primary-color  font-semibold hover:text-white py-2 px-4 border bg-primary-color text-black border-primary-color hover:border-transparent rounded">
+                Mulai Donasi
+              </button>
+            </Link>
           </li>
         </ul>
       </div>
