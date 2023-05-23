@@ -1,13 +1,31 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Cookies from "js-cookie";
 export default function Navbar() {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const [user, setUser] = useState<any>(null);
    const handleMenuToggle = () => {
      setIsMenuOpen(!isMenuOpen);
-   };
+  };
+  
+  useEffect(() => {
+    // get localstorage 
+    const user  = localStorage.getItem("user");
+
+    // if cookie is not null
+    if (user) {
+      // parse the cookie
+      const userData = JSON.parse(user);
+      // set user state
+      setUser(userData);
+    }
+  }, []);
+
+
+   
+
   return (
     <nav className="flex md:flex-row flex-col justify-between items-center w-full px-8 py-8 md:py-10 md:px-24 ">
       <div className="flex flex-row justify-between md:w-auto w-full">
@@ -108,7 +126,12 @@ export default function Navbar() {
           </li>
         </ul>
       </div>
-      <div className="md:flex hidden gap-4  ">
+         {
+          user ? (
+          <span>{user.name}</span>
+          ) : <div className="md:flex hidden gap-4  ">
+
+     
         {/* Register login */}
         <Link href={"/login"}>
           <button className="bg-transparent hover:bg-primary-color text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded">
@@ -123,6 +146,8 @@ export default function Navbar() {
           </button>
         </Link>
       </div>
+        }
+      
     </nav>
   );
 }

@@ -1,14 +1,22 @@
-"use client";
-
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import { EffectCards } from "swiper";
-import Image from "next/image";
+import useSWR from "swr";
 import FundingCardItem from "./funding_card_item";
 
 const SwiperComponent = () => {
+  const { data: fundingData, error } = useSWR(
+    "http://riseup-api.test/api/v1/funding",
+    fetcher
+  );
+
+  if (error) {
+    console.log("Error fetching funding data:", error);
+    // Handle the error state
+  }
+
   return (
     <Swiper
       effect={"cards"}
@@ -16,40 +24,36 @@ const SwiperComponent = () => {
       modules={[EffectCards]}
       className="mySwiper"
     >
-      <SwiperSlide>
-        <FundingCardItem
-          title="Startup X"
-          imageSrc="/dummy.jpg"
-          fundingAmount="Rp 1.250.000"
-          progress={30}
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        {" "}
-        <FundingCardItem
-          title="UKM X"
-          imageSrc="/dummy3.png"
-          fundingAmount="Rp 1.250.000"
-          progress={30}
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        {" "}
-        <FundingCardItem
-          title="UKM 5"
-          imageSrc="/register.jpg"
-          fundingAmount="Rp 1.250.000"
-          progress={30}
-        />
-      </SwiperSlide>
-      <SwiperSlide>Slide 4</SwiperSlide>
-      <SwiperSlide>Slide 5</SwiperSlide>
-      <SwiperSlide>Slide 6</SwiperSlide>
-      <SwiperSlide>Slide 7</SwiperSlide>
-      <SwiperSlide>Slide 8</SwiperSlide>
-      <SwiperSlide>Slide 9</SwiperSlide>
+      {fundingData ? (
+        fundingData.data.map((funding: any) => (
+          <SwiperSlide key={funding.id}>
+            <FundingCardItem
+              title={funding.title}
+              imageSrc={`https://freshmart.oss-ap-southeast-5.aliyuncs.com/images/images/${funding.image}`}
+              fundingAmount={funding.target_amount}
+              progress={calculateProgress(
+                funding.current_amount,
+                funding.target_amount
+              )}
+            />
+          </SwiperSlide>
+        ))
+      ) : (
+        <p>Loading...</p>
+      )}
     </Swiper>
   );
 };
+
+function fetcher(url : any) {
+  return fetch(url).then((response) => response.json());
+}
+
+function calculateProgress(currentAmount : any, targetAmount : any) {
+  const current = parseFloat(currentAmount);
+  const target = parseFloat(targetAmount);
+  return Math.floor((current / target) * 100);
+}
+
 
 export default SwiperComponent;

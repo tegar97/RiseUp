@@ -16,10 +16,10 @@ const FundingCardItem: React.FC<FundingCardItemProps> = ({
 }) => {
   return (
     <div className="bg-white rounded-lg">
-      <Image src={imageSrc} width={500} height={500} alt={""} />
+      <Image src={imageSrc} width={500} height={100} alt={""} className="w-full object-cover h-36"  />
       <div className="py-2 px-2 flex justify-between w-full flex-col h-full">
         <div className="mb-5">
-          <h3 className="text-md  text-black">{title}</h3>
+          <h3 className="text-md  text-black mb-2">{title}</h3>
           <div className="flex justify-between mt-2 mb-2">
             <span className="text-subtitle-text-color font-regular text-sm">
               {fundingAmount}

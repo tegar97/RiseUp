@@ -3,20 +3,25 @@ import Link from "next/link";
 import React from "react";
 
 interface FundingCardProps {
+  id: number;
   title: string;
   imageSrc: string;
   imageAlt: string;
   progress: number;
   fundingAmount: string;
+  desc : string;
 }
 
 const FundingCard: React.FC<FundingCardProps> = ({
+  id,
   title,
   imageSrc,
   imageAlt,
   progress,
   fundingAmount,
+  desc,
 }) => {
+
   return (
     <div className="bg-white rounded-lg">
       <Image
@@ -29,7 +34,7 @@ const FundingCard: React.FC<FundingCardProps> = ({
       <div className="p-5">
         <h3 className="text-2xl mb-4 text-black font-bold">{title}</h3>
         <p className="text-md font-light mb-5 text-black">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          {desc}
         </p>
         <div className="funding-progress">
           <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-primary-color">
@@ -49,7 +54,7 @@ const FundingCard: React.FC<FundingCardProps> = ({
           </div>
         </div>
         <div className="mt-5">
-          <Link href="/funding/1">
+          <Link href={`/funding/${id}`}>
             <button
               className="bg-primary-color text-black rounded-lg  font-semibold py-3 px-8 border  mt-5 w-full"
               style={{

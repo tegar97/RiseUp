@@ -1,8 +1,37 @@
+"use client"
 import React from "react";
 import Image from "next/image";
 import Navbar from "@/app/component/navbar";
+import useSWR from "swr";
+import { usePathname } from 'next/navigation';
 
-function page() {
+function Page() {
+
+    // get id from url
+  
+const pathname = usePathname();
+  
+  console.log();
+
+
+    const { data, error } = useSWR(
+      `http://riseup-api.test/api/v1/funding/${pathname.replace(
+        "/funding/",
+        ""
+      )}`,
+      fetcher
+    );
+
+    if (error) {
+      return <div>Error fetching data</div>;
+    }
+
+    if (!data) {
+      return <div>Loading...</div>;
+    }
+
+    const { title, image, target_amount, current_amount, ukm } = data.data;
+
   return (
     <>
       <Navbar />
@@ -10,24 +39,31 @@ function page() {
       <main className="flex min-h-screen flex-col   px-48 py-24">
         <div className="w-full max-h-screen relative">
           <Image
-            imageSrc="/image_gallery1.jpg"
-            alt="logo"
+            src={`https://freshmart.oss-ap-southeast-5.aliyuncs.com/images/images/${image}`}
+            alt="photo background"
             width={405}
             height={100}
-            className="rounded-3xl  h-full w-full  object-cover"
+            style={{height: 800}}
+            className="rounded-3xl  w-full   object-cover"
           />
 
           <div className="absolute bg-white w-1/3  right-20   -bottom-72  p-8 rounded-xl flex flex-col gap-6">
-            <h2 className="text-black font-semibold  text-xl ">
-              Share kidness
-            </h2>
+            <h2 className="text-black font-semibold  text-xl ">{title}</h2>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between ">
-                <span className="text-subtitle-text-color">Rp 1.250.00</span>
-                <span className="text-subtitle-text-color"> Rp 1.500.000</span>
+                <span className="text-subtitle-text-color">
+                  Rp {current_amount}
+                </span>
+                <span className="text-subtitle-text-color">
+                  {target_amount}
+                </span>
               </div>
               <div className="bg-gray-200 rounded-full h-2 w-full">
-                <div className="bg-primary-color rounded-full h-2 w-1/2"></div>
+                <div className="bg-primary-color rounded-full h-2 "
+                  style={{
+                    width: `${calculateProgress(current_amount, target_amount)}%`,
+                  }}
+                ></div>
               </div>
             </div>
             <div className="flex flex-col gap-4">
@@ -100,17 +136,24 @@ function page() {
         </div>
         <div className=" mt-14 px-24  w-1/2 ">
           <h2 className="text-white font-semibold  text-4xl costume-line-height-header-2 mb-4     ">
-            Donate For <br></br>{" "}
-            <span className="text-primary-color">UKM X</span>
+            Funding For <br></br>{" "}
+            <span className="text-primary-color">{ukm.name}</span>
           </h2>
-          <span>
-            Lorem donate help people life easier ipsum than heaven granted for
-            anyone who trying to help others
-          </span>
+          <span>{ukm.description}</span>
         </div>
       </main>
     </>
   );
 }
 
-export default page;
+function fetcher(url: any) {
+  return fetch(url).then((response) => response.json());
+}
+
+function calculateProgress(currentAmount: any, targetAmount: any) {
+  const current = parseFloat(currentAmount);
+  const target = parseFloat(targetAmount);
+  return Math.floor((current / target) * 100);
+}
+
+export default Page;

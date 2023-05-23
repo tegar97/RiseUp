@@ -1,13 +1,27 @@
+"use client"
 import Image from "next/image";
 import Navbar from "./component/navbar";
 import FundingCard from "./component/funding_card";
 import ProgressCard from "./component/progress_card";
 import SwiperComponent from "./component/donatioon_list";
 import FAQ from "./component/faq";
+import useSWR from "swr";
 
 
 
 export default function Home() {
+
+
+   const { data: fundingData, error } = useSWR(
+     "http://riseup-api.test/api/v1/funding",
+     fetcher
+   );
+
+   if (error) {
+     console.log("Error fetching funding data:", error);
+     // Handle the error state
+   }
+
   return (
     <>
       <Navbar />
@@ -59,13 +73,25 @@ export default function Home() {
           </h2>
 
           <div className=" grid grid-cols-1 md:grid-cols-3 gap-5">
-            <FundingCard
-              title="UKM Kreatif Indah"
-              imageSrc="/image_gallery1.jpg"
-              imageAlt="logo"
-              progress={30}
-              fundingAmount="1.250.000"
-            />
+            {fundingData ? (
+              fundingData.data.map((funding: any) => (
+                <FundingCard
+                  id={funding.id}
+                  key={funding.id}
+                  title={funding.title}
+                  desc={funding.fund_raise_use}
+                  imageSrc={`https://freshmart.oss-ap-southeast-5.aliyuncs.com/images/images/${funding.image}`}
+                  imageAlt="logo"
+                  progress={calculateProgress(
+                    funding.current_amount,
+                    funding.target_amount
+                  )}
+                  fundingAmount={funding.target_amount}
+                />
+              ))
+            ) : (
+              <p>Loading...</p>
+            )}
           </div>
         </div>
         <div className="progress flex flex-col gap-10 items-center">
@@ -120,4 +146,13 @@ export default function Home() {
       </main>
     </>
   );
+}
+function fetcher(url :any) {
+  return fetch(url).then((response) => response.json());
+}
+
+function calculateProgress(currentAmount : any , targetAmount :any) {
+  const current = parseFloat(currentAmount);
+  const target = parseFloat(targetAmount);
+  return Math.floor((current / target) * 100);
 }
