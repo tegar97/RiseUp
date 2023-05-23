@@ -1,17 +1,42 @@
 "use client"
-import React from "react";
+import React,{useState} from "react";
 import Image from "next/image";
 import Navbar from "@/app/component/navbar";
 import useSWR from "swr";
 import { usePathname } from 'next/navigation';
-
+import Cookies from "js-cookie";
+import axios from "axios";
 function Page() {
 
     // get id from url
   
-const pathname = usePathname();
+  const pathname = usePathname();
+  const [amount, setAmount] = useState(0);
+  
+  const pay = async () => {
+    // get id
+    const id = pathname.replace("/funding/", "");
+
+    // get token from cookies
+    const token = Cookies.get("token");
+
+    //if token is not exist redirect to login page and localstorage redirect to current page after login  
+    if (!token) {
+      window.location.href = "/login";
+      localStorage.setItem("redirect", pathname);
+    }
+
+
+    // axios post  http://riseup-api.test/api/v1/transaction wit bearer 
+    const res = await axios.post(`http://riseup-api.test/api/v1/transaction`, { funding_id: id, amount: amount }, { headers: { Authorization: `Bearer ${token}` } })   
+    
+    // redirect to payment gateway 
+    window.location.href = res.data.data.redirect_url;
+  }
   
   console.log();
+
+
 
 
     const { data, error } = useSWR(
@@ -116,8 +141,10 @@ const pathname = usePathname();
                 <div className="flex flex-col gap-4">
                   <input
                     type="text"
-                    name="name"
-                    id="name"
+                    name="amount"
+                    value={amount}
+                    onChange={(e) => setAmount(parseInt(e.target.value))}
+                    id="amount"
                     placeholder="Fund amount (min. Rp 10.000)"
                     className="border text-black border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:border-primary-color"
                   />
@@ -128,6 +155,7 @@ const pathname = usePathname();
                 style={{
                   borderRadius: "50px",
                 }}
+                onClick={pay}
               >
                 Fund Now
               </button>
