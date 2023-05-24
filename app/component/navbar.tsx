@@ -4,23 +4,30 @@ import Image from "next/image";
 import Link from "next/link";
 import Cookies from "js-cookie";
 export default function Navbar() {
-   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [session, setSession] = useState<any>(null);
   const [user, setUser] = useState<any>(null);
    const handleMenuToggle = () => {
      setIsMenuOpen(!isMenuOpen);
   };
   
   useEffect(() => {
+    //get cookie
+    const session = Cookies.get("token");
     // get localstorage 
-    const user  = localStorage.getItem("user");
 
     // if cookie is not null
-    if (user) {
+    if (session) {
+      const user = localStorage.getItem("user");
+
+      if (user) {
+        
+        const userData = JSON.parse(user);
+        setUser(userData);
+      }
       // parse the cookie
-      const userData = JSON.parse(user);
       // set user state
-      setUser(userData);
-    }
+    } 
   }, []);
 
 

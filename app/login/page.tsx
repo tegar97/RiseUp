@@ -153,11 +153,11 @@ function Page() {
       </div>
       <div className="col-span-5">
         <Image
-          src="/dummy1.png"
+          src="/image_gallery2.jpg"
           alt="logo"
           width={500}
           height={500}
-          className="w-full h-full"
+          className="w-full h-full object-cover"
         />
       </div>
     </div>

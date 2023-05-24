@@ -11,7 +11,7 @@ function Page() {
     // get id from url
   
   const pathname = usePathname();
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(10000);
   
   const pay = async () => {
     // get id
@@ -68,7 +68,7 @@ function Page() {
             alt="photo background"
             width={405}
             height={100}
-            style={{height: 800}}
+            style={{ height: 800 }}
             className="rounded-3xl  w-full   object-cover"
           />
 
@@ -84,9 +84,13 @@ function Page() {
                 </span>
               </div>
               <div className="bg-gray-200 rounded-full h-2 w-full">
-                <div className="bg-primary-color rounded-full h-2 "
+                <div
+                  className="bg-primary-color rounded-full h-2 "
                   style={{
-                    width: `${calculateProgress(current_amount, target_amount)}%`,
+                    width: `${calculateProgress(
+                      current_amount,
+                      target_amount
+                    )}%`,
                   }}
                 ></div>
               </div>
@@ -140,9 +144,8 @@ function Page() {
               <form>
                 <div className="flex flex-col gap-4">
                   <input
-                    type="text"
+                    type="number"
                     name="amount"
-                    value={amount}
                     onChange={(e) => setAmount(parseInt(e.target.value))}
                     id="amount"
                     placeholder="Fund amount (min. Rp 10.000)"
@@ -162,12 +165,40 @@ function Page() {
             </div>
           </div>
         </div>
-        <div className=" mt-14 px-24  w-1/2 ">
-          <h2 className="text-white font-semibold  text-4xl costume-line-height-header-2 mb-4     ">
-            Funding For <br></br>{" "}
-            <span className="text-primary-color">{ukm.name}</span>
-          </h2>
-          <span>{ukm.description}</span>
+        <div className="flex flex-col gap-80">
+          <div className=" mt-14 px-24  w-1/2 ">
+            <h2 className="text-white font-semibold  text-4xl costume-line-height-header-2 mb-4     ">
+              Funding For <br></br>{" "}
+              <span className="text-primary-color">{ukm.name}</span>
+            </h2>
+            <span>{ukm.description}</span>
+          </div>
+          <div className="flex flex-col gap-20">
+            <div className="w-1/2 ">
+              <h2 className="text-white font-semibold  text-2xl costume-line-height-header-2 mb-4 px-24">
+                Funding For <br></br>{" "}
+              </h2>
+
+              <div className=" px-24">
+                <p>
+                  Expanding production: We will expand production capacity by
+                  purchasing needed equipment and raw materials. This will help
+                  Karya Indah
+                </p>
+              </div>
+            </div>
+
+            <div className="w-1/2">
+              <h2 className="text-white font-semibold  text-2xl costume-line-height-header-2 mb-4 px-24">
+                Latest Transaction <br></br>{" "}
+              </h2>
+              <div className="flex flex-row gap-4 px-24 ">
+                <div className="border border-gray-400 rounded-md w-full  px-4 py-4">
+                  Tegar  has funded Rp 10.000 for this project 1 minute ago 
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </>

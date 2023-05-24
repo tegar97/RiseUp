@@ -84,6 +84,7 @@ function Login() {
       //redirect page dashboard
       Router.push("/dashboard");
     }
+    
   }, []);
   return <div>login</div>;
 }

@@ -5,6 +5,7 @@ import "swiper/css/effect-cards";
 import { EffectCards } from "swiper";
 import useSWR from "swr";
 import FundingCardItem from "./funding_card_item";
+import Link from "next/link";
 
 const SwiperComponent = () => {
   const { data: fundingData, error } = useSWR(
@@ -28,14 +29,17 @@ const SwiperComponent = () => {
         fundingData.data.map((funding: any) => (
           <SwiperSlide key={funding.id}>
             <FundingCardItem
-              title={funding.title}
-              imageSrc={`https://freshmart.oss-ap-southeast-5.aliyuncs.com/images/images/${funding.image}`}
-              fundingAmount={funding.target_amount}
-              progress={calculateProgress(
-                funding.current_amount,
-                funding.target_amount
-              )}
-            />
+              id={funding.id}
+                title={funding.title}
+                imageSrc={`https://freshmart.oss-ap-southeast-5.aliyuncs.com/images/images/${funding.image}`}
+                fundingAmount={funding.current_amount}
+                targetAmount={funding.target_amount}
+                progress={calculateProgress(
+                  funding.current_amount,
+                  funding.target_amount
+                )}
+              />
+       
           </SwiperSlide>
         ))
       ) : (
