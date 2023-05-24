@@ -91,8 +91,8 @@ function Page() {
     }
   }, []);
   return (
-    <div className="w-full  h-screen grid grid-cols-8 overflow-hidden ">
-      <div className="bg-white w-full h-full col-span-3 ">
+    <div className="w-full h-screen grid grid-cols-1 lg:grid-cols-8 overflow-hidden">
+      <div className="bg-white w-full h-full lg:col-span-3">
         <div className="px-5 py-5">
           <Link
             href="/"
@@ -101,23 +101,35 @@ function Page() {
             <Image src="/logo2.png" alt="logo" width={188} height={40} />
           </Link>
         </div>
-        <div className="flex flex-col justify-center  px-32  h-full">
-          <h1 className="text-black font-bold text-3xl mb-4 ">
-            Access your account{" "}
+
+        <div className="flex flex-col justify-center px-5 lg:px-32 h-full">
+          {
+            //check validation\
+            Object.keys(validation).length > 0 && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-5">
+                <ul>
+                  {Object.values(validation).map((value) =>
+                    value.map((item, index) => <li key={index}>{item}</li>)
+                  )}
+                </ul>
+              </div>
+            )
+          }
+          <h1 className="text-black font-bold text-3xl mb-4">
+            Access your account
           </h1>
-          <p className=" text-md font-regular text-[#858585]">
+          <p className="text-md font-regular text-[#858585]">
             Unlock the potential of your startup or UKM by registering today.
           </p>
-          <form className="flex gap-3 flex-col mt-10">
+          <form className="flex flex-col mt-10">
             <div className="flex flex-col gap-4">
-             
               <input
                 type="email"
                 name="email"
-                value={email} 
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 id="email"
-                placeholder="Enter  Your email "
+                placeholder="Enter Your email"
                 className="border text-black border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:border-primary-color"
               />
               <input
@@ -126,24 +138,22 @@ function Page() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 id="password"
-                placeholder="Enter  Your password "
+                placeholder="Enter Your password"
                 className="border text-black border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:border-primary-color"
               />
             </div>
 
             <button
-              className="bg-primary-color text-black rounded-lg  font-semibold py-3 px-8 border  mt-5"
+              className="bg-primary-color text-black rounded-lg font-semibold py-3 px-8 border mt-5"
               style={{
                 borderRadius: "50px",
               }}
-              onClick={
-                (e) => loginHandler(e)
-              }
+              onClick={(e: any) => loginHandler(e)}
             >
               Login Now
             </button>
             <p className="text-md text-center font-regular text-[#858585] mt-5">
-              Don`t have an account?{" "}
+              Don t have an account?{" "}
               <Link href="/register" className="text-primary-color">
                 Register
               </Link>
@@ -151,7 +161,7 @@ function Page() {
           </form>
         </div>
       </div>
-      <div className="col-span-5">
+      <div className="col-span-5 hidden lg:block">
         <Image
           src="/image_gallery2.jpg"
           alt="logo"

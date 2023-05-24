@@ -61,21 +61,40 @@ function Page() {
     <>
       <Navbar />
 
-      <main className="flex min-h-screen flex-col   px-48 py-24">
-        <div className="w-full max-h-screen relative">
+      <main className="flex min-h-screen flex-col px-5 lg:px-48 py-24 relative">
+        <div className="fixed z-10 bg-white w-full flex-col  py-4 px-4 bottom-0  flex justify-between lg:hidden ">
+          <input
+            type="number"
+            name="amount"
+            onChange={(e) => setAmount(parseInt(e.target.value))}
+            id="amount"
+            placeholder="Fund amount (min. Rp 10.000)"
+            className="border text-black border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:border-primary-color"
+          />
+          <button
+            className="bg-primary-color text-black rounded-lg  font-semibold py-3 px-8 border  mt-5"
+            style={{
+              borderRadius: "50px",
+            }}
+            onClick={pay}
+          >
+            Fund Now
+          </button>
+        </div>
+        <div className="w-full max-h-screen relative ">
           <Image
             src={`https://freshmart.oss-ap-southeast-5.aliyuncs.com/images/images/${image}`}
             alt="photo background"
             width={405}
             height={100}
             style={{ height: 800 }}
-            className="rounded-3xl  w-full   object-cover"
+            className="rounded-3xl w-full object-cover"
           />
 
-          <div className="absolute bg-white w-1/3  right-20   -bottom-72  p-8 rounded-xl flex flex-col gap-6">
-            <h2 className="text-black font-semibold  text-xl ">{title}</h2>
+          <div className="lg:absolute hidden  bg-white w-full lg:w-1/3 right-0 bottom-0 -mb-72 p-8 rounded-xl lg:flex flex-col gap-6">
+            <h2 className="text-black font-semibold text-xl">{title}</h2>
             <div className="flex flex-col gap-2">
-              <div className="flex justify-between ">
+              <div className="flex justify-between">
                 <span className="text-subtitle-text-color">
                   Rp {current_amount}
                 </span>
@@ -85,7 +104,7 @@ function Page() {
               </div>
               <div className="bg-gray-200 rounded-full h-2 w-full">
                 <div
-                  className="bg-primary-color rounded-full h-2 "
+                  className="bg-primary-color rounded-full h-2"
                   style={{
                     width: `${calculateProgress(
                       current_amount,
@@ -96,8 +115,8 @@ function Page() {
               </div>
             </div>
             <div className="flex flex-col gap-4">
-              <h2 className="text-black font-semibold  text-md ">
-                What you will get ?
+              <h2 className="text-black font-semibold text-md">
+                What you will get?
               </h2>
               <ul className="flex flex-col gap-4">
                 <li className="flex flex-row gap-2">
@@ -106,11 +125,10 @@ function Page() {
                     alt="logo"
                     width={24}
                     height={24}
-                    className="object-cover h-full "
+                    className="object-cover h-full"
                   />
-
                   <p className="text-subtitle-text-color">
-                    Get special service from us{" "}
+                    Get special service from us
                   </p>
                 </li>
                 <li className="flex flex-row gap-2">
@@ -119,11 +137,10 @@ function Page() {
                     alt="logo"
                     width={24}
                     height={24}
-                    className="object-cover h-full "
+                    className="object-cover h-full"
                   />
-
                   <p className="text-subtitle-text-color">
-                    You can also sell your equity once the s tartup going ipo
+                    You can also sell your equity once the startup going IPO
                   </p>
                 </li>
                 <li className="flex flex-row gap-2">
@@ -132,10 +149,9 @@ function Page() {
                     alt="logo"
                     width={24}
                     height={24}
-                    className="object-cover h-full "
+                    className="object-cover h-full"
                   />
-
-                  <p className="text-subtitle-text-color">And more ...</p>
+                  <p className="text-subtitle-text-color">And more...</p>
                 </li>
               </ul>
             </div>
@@ -165,36 +181,36 @@ function Page() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-80">
-          <div className=" mt-14 px-24  w-1/2 ">
-            <h2 className="text-white font-semibold  text-4xl costume-line-height-header-2 mb-4     ">
-              Funding For <br></br>{" "}
+        <div className="flex flex-col gap-8 mt-20 lg:mt-10">
+          <div className="mt-14 px-5 w-full lg:w-1/2">
+            <h2 className="text-white font-semibold text-4xl costume-line-height-header-2 mb-4">
+              Funding For <br />
               <span className="text-primary-color">{ukm.name}</span>
             </h2>
             <span>{ukm.description}</span>
           </div>
-          <div className="flex flex-col gap-20">
-            <div className="w-1/2 ">
-              <h2 className="text-white font-semibold  text-2xl costume-line-height-header-2 mb-4 px-24">
-                Funding For <br></br>{" "}
+          <div className="flex flex-col gap-8">
+            <div className="w-full lg:w-1/2">
+              <h2 className="text-white font-semibold text-2xl costume-line-height-header-2 mb-4">
+                Funding For <br />
               </h2>
-
-              <div className=" px-24">
+              <div className="px-5 ">
                 <p>
                   Expanding production: We will expand production capacity by
                   purchasing needed equipment and raw materials. This will help
-                  Karya Indah
+                  Karya Indah.
                 </p>
               </div>
             </div>
-
-            <div className="w-1/2">
-              <h2 className="text-white font-semibold  text-2xl costume-line-height-header-2 mb-4 px-24">
-                Latest Transaction <br></br>{" "}
+            <div className="w-full lg:w-1/2">
+              <h2 className="text-white font-semibold text-2xl costume-line-height-header-2 mb-4">
+                Latest Transaction <br />
               </h2>
-              <div className="flex flex-row gap-4 px-24 ">
-                <div className="border border-gray-400 rounded-md w-full  px-4 py-4">
-                  Tegar  has funded Rp 10.000 for this project 1 minute ago 
+              <div className="flex flex-col gap-4 px-5 ">
+                <div className="border border-gray-400 rounded-md px-4 py-4">
+                  <p className="text-subtitle-text-color">
+                    Tegar has funded Rp 10.000 for this project 1 minute ago
+                  </p>
                 </div>
               </div>
             </div>
@@ -204,7 +220,6 @@ function Page() {
     </>
   );
 }
-
 function fetcher(url: any) {
   return fetch(url).then((response) => response.json());
 }
