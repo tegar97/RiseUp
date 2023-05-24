@@ -30,6 +30,7 @@ const SwiperComponent = () => {
           <SwiperSlide key={funding.id}>
             <FundingCardItem
               id={funding.id}
+              ukm={funding.ukm.name}
                 title={funding.title}
                 imageSrc={`https://freshmart.oss-ap-southeast-5.aliyuncs.com/images/images/${funding.image}`}
                 fundingAmount={funding.current_amount}

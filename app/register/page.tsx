@@ -48,8 +48,12 @@ function Page() {
 
     if (Object.keys(errors).length > 0) {
       setValidation(errors);
+
+      console.log(validation  )
       return;
     }
+
+    
 
     console.log('Check point')
     //send data to server
@@ -82,9 +86,21 @@ function Page() {
           window.location.href = "/";
         }
       })
-      .catch((error) => {
-        console.log(error);
-      });
+    .catch((error) => {
+      if (error.response && error.response.data && error.response.data.errors) {
+        const responseErrors = error.response.data.errors;
+
+        // Map response errors to validation state
+        const updatedErrors: { [key: string]: string[] } = {};
+
+        Object.keys(responseErrors).forEach((key) => {
+          updatedErrors[key] = responseErrors[key];
+        });
+
+        setValidation(updatedErrors);
+      }
+      console.log(error);
+    });
   };
 
   //hook useEffect
@@ -95,6 +111,7 @@ function Page() {
       redirect("/");
     }
   }, []);
+      console.log(validation);
   return (
     <div className="w-full  h-screen grid grid-cols-8 overflow-hidden ">
       <div className="bg-white w-full h-full col-span-3 ">

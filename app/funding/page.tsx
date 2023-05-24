@@ -5,7 +5,7 @@ import FundingCard from '../component/funding_card';
 import useSWR from "swr";
 import { useState } from 'react';
 function Page() {
-  const [categorySelect, setCategorySelect] = useState(1)
+  const [categorySelect, setCategorySelect] = useState(null)
   const [searchText, setSearchText] = useState("")
   const [sortSelect, setSortSelect] = useState("")
  const { data : categoryData, error } = useSWR(

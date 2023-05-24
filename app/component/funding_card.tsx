@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import convertToRupiah from "../helper/convertToRupiah";
 
 interface FundingCardProps {
   id: number;
@@ -50,7 +51,9 @@ const FundingCard: React.FC<FundingCardProps> = ({
           </div>
           <div className="flex justify-between text-black">
             <span>{progress}% </span>
-            <span>Rp {fundingAmount}</span>
+            <span> { convertToRupiah(
+              parseInt(fundingAmount)
+            ) }</span>
           </div>
         </div>
         <div className="mt-5">

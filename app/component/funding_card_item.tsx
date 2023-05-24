@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import convertToRupiah from "../helper/convertToRupiah";
 
 interface FundingCardItemProps {
   id: number;
@@ -9,6 +10,7 @@ interface FundingCardItemProps {
   fundingAmount: string;
   progress: number;
   targetAmount: string;
+  ukm: string;
 }
 
 const FundingCardItem: React.FC<FundingCardItemProps> = ({
@@ -17,7 +19,8 @@ const FundingCardItem: React.FC<FundingCardItemProps> = ({
   imageSrc,
   fundingAmount,
   progress,
-  targetAmount
+  targetAmount,
+  ukm
 }) => {
   return (
     <div className="bg-white rounded-lg">
@@ -30,13 +33,13 @@ const FundingCardItem: React.FC<FundingCardItemProps> = ({
       />
       <div className="py-2 px-2 flex justify-between w-full flex-col h-full">
         <div className="mb-5">
-          <h3 className="text-md  text-black mb-2">{title}</h3>
+          <h3 className="  text-black mb-2" style={{fontSize: 19  }}>{ukm}</h3>
           <div className="flex justify-between mt-2 mb-2">
             <span className="text-subtitle-text-color font-regular text-sm">
-              Rp {fundingAmount}
+             {convertToRupiah(parseInt(fundingAmount))}
             </span>
             <span className="text-subtitle-text-color  font-regular text-sm">
-              Rp {targetAmount}
+                {convertToRupiah(parseInt(targetAmount))}
             </span>
           </div>
           <div className="w-full">
