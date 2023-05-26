@@ -39,7 +39,7 @@ export default function Navbar() {
    
 
   return (
-    <nav className="flex md:flex-row flex-col justify-between items-center w-full px-8 py-8 md:py-10 md:px-24 ">
+    <nav className="flex md:flex-row flex-col justify-between items-center w-full px-8 py-8 md:py-10 md:px-24 bg-transparent ">
       <div className="flex flex-row justify-between md:w-auto w-full">
         <div>
           <Link

@@ -19,9 +19,9 @@ function Page() {
     error: fundingError,
     mutate: mutateFundingData,
   } = useSWR(
-    !clickSearch
-      ? `${process.env.NEXT_PUBLIC_API_BACKEND}/funding`
-      : `${process.env.NEXT_PUBLIC_API_BACKEND}/funding?${
+   
+     
+     `${process.env.NEXT_PUBLIC_API_BACKEND}/funding?${
           categorySelect ? `category_id=${categorySelect}` : ""
         }&${searchText ? `search=${searchText}` : ""}&${
           sortSelect ? `sort=${sortSelect}` : ""
