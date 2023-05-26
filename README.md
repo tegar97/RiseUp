@@ -1,34 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Riseup
 
-## Getting Started
+## Codespace - Orion Team
 
-First, run the development server:
+- Yoga ramadhan
+- Muhammad Tegar Akmal
+- Muhammad Hafidz Fadillah
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Problem
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Dalam lingkungan bisnis yang kompetitif, banyak UMKM yang memiliki ide-ide kreatif, produk berkualitas, dan layanan unik, namun mereka sering menghadapi kesulitan dalam mendapatkan sumber dana yang cukup untuk mengembangkan bisnis mereka. Hal ini dapat menghambat pertumbuhan mereka, bahkan mengancam kelangsungan operasional UMKM tersebut.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Solution
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Berdasarkan permasalahan diatas , kita menawarkan solusi sebagai berikut
 
-## Learn More
+- RiseUp dapat menyediakan platform crowdfunding yang memungkinkan UMKM untuk mengumpulkan dana dari masyarakat luas.
+- RiseUp dapat menyediakan jaringan investor yang terdiri dari individu, kelompok investasi, dan lembaga keuangan yang tertarik untuk mendukung pertumbuhan UMKM
+- RiseUp dapat menjadi wadah bagi UMKM untuk mempromosikan produk dan jasa mereka kepada khalayak yang lebih luas.
+- RiseUp dapat memfasilitasi kemitraan dan kolaborasi antara UMKM dengan pihak lain, seperti perusahaan besar atau lembaga pendukung
 
-To learn more about Next.js, take a look at the following resources:
+## Product
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+RiseUp hadir untuk mendorong pertumbuhan, membangun ekosistem yang mendukung, dan memberikan kesempatan kepada UMKM untuk tumbuh menjadi bisnis yang sukses. Dengan kemudahan penggunaan, aksesibilitas, dan solusi yang komprehensif, RiseUp menjadi mitra yang dapat diandalkan bagi UMKM dalam menghadapi tantangan finansial dan meraih kesuksesan dalam dunia bisnis.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Presentasi Video
 
-## Deploy on Vercel
+Coming Soon ^_^
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Core Tech
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Untuk membangun Riseup kita menggunakan  beberapa teknologi  seperti :
+
+- Typescript
+- Next Js
+- Laravel
+- Tailwind
+- Alibaba object storage
+
+## Screenshot
+
+![alt text](https://github.com/hafidzfadillah/VitaFlow/blob/main/assets/images/all_ss4.jpg?raw=true)
+
+## Installation
+
+Wesbite Riseup telah live di : <https://rise-up-eight.vercel.app/>
+
+## How to pay funding
+
+- Pilih funding yang tersedia pada website riseup
+- masukan nominmal dengan minimum 10 ribu
+- pilih metode pembayaran (Rekomendasi memakai qris gopay)
+- copy code atau jika memakai qris , cklik kanan qr code -> copy link  image
+- buka website : <https://simulator.sandbox.midtrans.com/qris/index>
+- paste code
+- Tunggu 10-15 detik
+
+-
+
+## License
+
+MIT
+
+**Free Software, Hell Yeah!**
