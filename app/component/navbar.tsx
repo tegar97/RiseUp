@@ -133,9 +133,14 @@ export default function Navbar() {
           </li>
         </ul>
       </div>
+   
          {
-          user ? (
-          <span>{user.name}</span>
+        user ? (
+             <Link href={"/dasboard/profile"}>
+        
+               <span>{user.name}</span>
+      
+      </Link>
           ) : <div className="md:flex hidden gap-4  ">
 
      

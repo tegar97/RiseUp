@@ -45,13 +45,11 @@ function Page() {
     //send data to server
     await axios
       .post<{ token: { token: string }; user: any }>(
-        `http://riseup-api.test/api/v1/auth/login`,
+        `${process.env.NEXT_PUBLIC_API_BACKEND}/auth/login`,
         formData
       )
       .then((response: any) => {
-
-        
-        console.log(response.data.user.name)
+        console.log(response.data.user.name);
         //set token on cookies
         Cookies.set("token", response.data.access_token);
 
@@ -69,15 +67,38 @@ function Page() {
         if (redirectUrl) {
           localStorage.removeItem("redirect");
           // redirect(redirectUrl);
-                    window.location.href =  redirectUrl;
-
+          window.location.href = redirectUrl;
         } else {
           window.location.href = "/";
         }
       })
       .catch((error) => {
-        console.log(error)
+        console.log('error ' + error.response.data);
+        //assign error to state "validation"
+
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.errors
+        ) {
+                  console.log("error ");
+
+          const responseErrors = error.response.data.errors;
+
+          // Map response errors to validation state
+          const updatedErrors: { [key: string]: string[] } = {};
+
+          Object.keys(responseErrors).forEach((key) => {
+            updatedErrors[key] = responseErrors[key];
+          });
+
+          setValidation(updatedErrors);
+        }
+
       });
+
+    console.log(validation.message);
+
 
   };
 
@@ -98,7 +119,7 @@ function Page() {
             href="/"
             className="flex items-center flex-shrink-0 text-white mr-6"
           >
-            <Image src="/logo2.png" alt="logo" width={188} height={40} />
+            <Image src="/riseup2.png" alt="logo" width={188} height={40} />
           </Link>
         </div>
 
@@ -163,10 +184,10 @@ function Page() {
       </div>
       <div className="col-span-5 hidden lg:block">
         <Image
-          src="/image_gallery2.jpg"
-          alt="logo"
-          width={500}
-          height={500}
+          src="/image_login.webp"
+          alt="image login"
+          width={1500}
+          height={1500}
           className="w-full h-full object-cover"
         />
       </div>

@@ -43,7 +43,7 @@ function Login() {
     //send data to server
     await axios
       .post<{ token: { token: string }; user: any }>(
-        `http://riseup-api.test/api/v1/auth/login`,
+        `${process.env.NEXT_PUBLIC_API_BACKEND}/auth/login`,
         formData
       )
       .then((response) => {
@@ -69,9 +69,28 @@ function Login() {
         }
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log('error ' + error.response.data);
         //assign error to state "validation"
-        setValidation(error.response.data);
+
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.errors
+        ) {
+                  console.log("error " + error.response.data.message);
+
+          const responseErrors = error.response.data.errors;
+
+          // Map response errors to validation state
+          const updatedErrors: { [key: string]: string[] } = {};
+
+          Object.keys(responseErrors).forEach((key) => {
+            updatedErrors[key] = responseErrors[key];
+          });
+
+          setValidation(updatedErrors);
+        }
+
       });
 
     console.log(validation.message);

@@ -47,7 +47,7 @@ const FundingCardItem: React.FC<FundingCardItemProps> = ({
               <div
                 className="bg-primary-color rounded-full h-2"
                 style={{
-                  width: `${progress}%`,
+                  width: `${progress > 100 ? 100 :  progress}%`,
                   transition: "width 0.5s ease-in-out", // Menambahkan animasi transisi
                 }}
               ></div>

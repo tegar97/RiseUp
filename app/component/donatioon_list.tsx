@@ -6,10 +6,12 @@ import { EffectCards } from "swiper";
 import useSWR from "swr";
 import FundingCardItem from "./funding_card_item";
 import Link from "next/link";
+import SkeletonCard from "./skeleton_card";
+import { useSpring, animated, config } from "react-spring";
 
 const SwiperComponent = () => {
   const { data: fundingData, error } = useSWR(
-    "http://riseup-api.test/api/v1/funding",
+    `${process.env.NEXT_PUBLIC_API_BACKEND}/funding`,
     fetcher
   );
 
@@ -17,8 +19,18 @@ const SwiperComponent = () => {
     console.log("Error fetching funding data:", error);
     // Handle the error state
   }
-
+const animationProps = useSpring({
+  from: { transform: "rotate(0deg) translateY(0)" },
+  to: async (next: any) => {
+    while (true) {
+      await next({ transform: "rotate(360deg) translateY(-10px)" });
+      await next({ transform: "rotate(0deg) translateY(0)" });
+    }
+  },
+  config: config.slow,
+});
   return (
+    
     <Swiper
       effect={"cards"}
       grabCursor={true}
@@ -44,7 +56,10 @@ const SwiperComponent = () => {
           </SwiperSlide>
         ))
       ) : (
-        <p>Loading...</p>
+          <div className="h-full">
+
+            <SkeletonCard/>
+          </div>
       )}
     </Swiper>
   );

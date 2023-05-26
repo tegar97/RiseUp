@@ -59,7 +59,7 @@ function Page() {
     //send data to server
     await axios
       .post<{ token: { token: string }; user: any }>(
-        `http://riseup-api.test/api/v1/auth/register`,
+        `${process.env.NEXT_PUBLIC_API_BACKEND}/auth/register`,
         formData
       )
       .then((response: any) => {
@@ -86,21 +86,25 @@ function Page() {
           window.location.href = "/";
         }
       })
-    .catch((error) => {
-      if (error.response && error.response.data && error.response.data.errors) {
-        const responseErrors = error.response.data.errors;
+      .catch((error) => {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.errors
+        ) {
+          const responseErrors = error.response.data.errors;
 
-        // Map response errors to validation state
-        const updatedErrors: { [key: string]: string[] } = {};
+          // Map response errors to validation state
+          const updatedErrors: { [key: string]: string[] } = {};
 
-        Object.keys(responseErrors).forEach((key) => {
-          updatedErrors[key] = responseErrors[key];
-        });
+          Object.keys(responseErrors).forEach((key) => {
+            updatedErrors[key] = responseErrors[key];
+          });
 
-        setValidation(updatedErrors);
-      }
-      console.log(error);
-    });
+          setValidation(updatedErrors);
+        }
+        console.log(error);
+      });
   };
 
   //hook useEffect
@@ -120,7 +124,7 @@ function Page() {
             href="/"
             className="flex items-center flex-shrink-0 text-white mr-6"
           >
-            <Image src="/logo2.png" alt="logo" width={188} height={40} />
+            <Image src="/riseup2.png" alt="logo" width={188} height={40} />
           </Link>
         </div>
         <div className="flex flex-col justify-center px-5 lg:px-32 h-full">
@@ -195,8 +199,8 @@ function Page() {
         <Image
           src="/register.jpg"
           alt="logo"
-          width={500}
-          height={500}
+          width={1500}
+          height={1500}
           className="w-full h-full object-cover"
         />
       </div>

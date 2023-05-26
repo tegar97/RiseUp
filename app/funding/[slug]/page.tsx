@@ -6,14 +6,29 @@ import useSWR from "swr";
 import { usePathname } from 'next/navigation';
 import Cookies from "js-cookie";
 import axios from "axios";
+import convertToRupiah from "@/app/helper/convertToRupiah";
+import { NumericFormat } from "react-number-format";
+import moment from "moment";
 function Page() {
 
     // get id from url
   
   const pathname = usePathname();
   const [amount, setAmount] = useState(10000);
-  
+   const formatCurrency = (value: number | null): string => {
+     if (value === null) return "";
+     return value.toLocaleString("id-ID", {
+       style: "currency",
+       currency: "IDR",
+       minimumFractionDigits: 0,
+     });
+   };
   const pay = async () => {
+
+    if (amount < 10000) {
+      alert("Minimum amount is Rp 10.000");
+      return;
+    }
     // get id
     const id = pathname.replace("/funding/", "");
 
@@ -28,7 +43,11 @@ function Page() {
 
 
     // axios post  http://riseup-api.test/api/v1/transaction wit bearer 
-    const res = await axios.post(`http://riseup-api.test/api/v1/transaction`, { funding_id: id, amount: amount }, { headers: { Authorization: `Bearer ${token}` } })   
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_BACKEND}/transaction`,
+      { funding_id: id, amount: amount },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );   
     
     // redirect to payment gateway 
     window.location.href = res.data.data.redirect_url;
@@ -40,7 +59,7 @@ function Page() {
 
 
     const { data, error } = useSWR(
-      `http://riseup-api.test/api/v1/funding/${pathname.replace(
+      `${process.env.NEXT_PUBLIC_API_BACKEND}/funding/${pathname.replace(
         "/funding/",
         ""
       )}`,
@@ -52,10 +71,22 @@ function Page() {
     }
 
     if (!data) {
-      return <div>Loading...</div>;
+      return (
+        <div className="flex items-center justify-center h-screen">
+          <div className="w-16 h-16 border-4 border-primary-color rounded-full animate-spin"></div>
+        </div>
+      );
     }
 
-    const { title, image, target_amount, current_amount, ukm } = data.data;
+    const {
+      title,
+      big_image,
+      target_amount,
+      current_amount,
+      ukm,
+      fund_raise_use,
+      payments
+    } = data.data;
 
   return (
     <>
@@ -83,7 +114,7 @@ function Page() {
         </div>
         <div className="w-full max-h-screen relative ">
           <Image
-            src={`https://freshmart.oss-ap-southeast-5.aliyuncs.com/images/images/${image}`}
+            src={`https://freshmart.oss-ap-southeast-5.aliyuncs.com/images/images/${big_image}`}
             alt="photo background"
             width={405}
             height={100}
@@ -96,10 +127,10 @@ function Page() {
             <div className="flex flex-col gap-2">
               <div className="flex justify-between">
                 <span className="text-subtitle-text-color">
-                  Rp {current_amount}
+                  {convertToRupiah(current_amount)}
                 </span>
                 <span className="text-subtitle-text-color">
-                  {target_amount}
+                  {convertToRupiah(target_amount)}
                 </span>
               </div>
               <div className="bg-gray-200 rounded-full h-2 w-full">
@@ -159,13 +190,24 @@ function Page() {
             <div className="flex flex-col">
               <form>
                 <div className="flex flex-col gap-4">
-                  <input
-                    type="number"
+                  {/* <input
+                    type="text"
                     name="amount"
                     onChange={(e) => setAmount(parseInt(e.target.value))}
                     id="amount"
+                    value={amount !== null ? formatCurrency(amount) : ""}
                     placeholder="Fund amount (min. Rp 10.000)"
                     className="border text-black border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:border-primary-color"
+                  /> */}
+                  <NumericFormat
+                    thousandSeparator={true}
+                    prefix={"Rp "}
+                    placeholder="Fund amount (min. Rp 10.000)"
+                    className="border text-black border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:border-primary-color"
+                    onValueChange={(values) => {
+                      const { formattedValue, value } = values;
+                      setAmount(parseInt(value));
+                    }}
                   />
                 </div>
               </form>
@@ -191,27 +233,45 @@ function Page() {
           </div>
           <div className="flex flex-col gap-8">
             <div className="w-full lg:w-1/2">
-              <h2 className="text-white font-semibold text-2xl costume-line-height-header-2 mb-4">
+              <h2 className="px-5 text-white font-semibold text-2xl costume-line-height-header-2 mb-4">
                 Funding For <br />
               </h2>
               <div className="px-5 ">
-                <p>
-                  Expanding production: We will expand production capacity by
-                  purchasing needed equipment and raw materials. This will help
-                  Karya Indah.
-                </p>
+                <p>{fund_raise_use}</p>
               </div>
             </div>
             <div className="w-full lg:w-1/2">
-              <h2 className="text-white font-semibold text-2xl costume-line-height-header-2 mb-4">
+              <h2 className="px-5 text-white font-semibold text-2xl costume-line-height-header-2 mb-4">
                 Latest Transaction <br />
               </h2>
               <div className="flex flex-col gap-4 px-5 ">
-                <div className="border border-gray-400 rounded-md px-4 py-4">
-                  <p className="text-subtitle-text-color">
-                    Tegar has funded Rp 10.000 for this project 1 minute ago
-                  </p>
-                </div>
+                {payments
+                  ? payments.map((payment: any) => {
+                      return (
+                        payment.status === 1 && (
+                          <div
+                            key={payment.id}
+                            className="mb-2 border border-gray-400 rounded-md px-4 py-4"
+                          >
+                            <p className="text-white">
+                              <span className="font-bold">
+                                {payment.user.name}
+                              </span>{" "}
+                              has funded{" "}
+                              <span className="font-bold">
+                                {convertToRupiah(payment.amount)}
+                              </span>{" "}
+                              for this project{" "}
+                              {
+                                // format ex 1 minute ago , 2 days ago
+                                moment(payment.created_at).fromNow()
+                              }
+                            </p>
+                          </div>
+                        )
+                      );
+                    })
+                  : null}
               </div>
             </div>
           </div>

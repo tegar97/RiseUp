@@ -8,8 +8,9 @@ function Page() {
   const [categorySelect, setCategorySelect] = useState(null)
   const [searchText, setSearchText] = useState("")
   const [sortSelect, setSortSelect] = useState("")
+  const [clickSearch , setClickSearch] = useState(false)
  const { data : categoryData, error } = useSWR(
-   `http://riseup-api.test/api/v1/categories`,
+   `${process.env.NEXT_PUBLIC_API_BACKEND}/categories`,
    fetcher
   );
   
@@ -18,19 +19,24 @@ function Page() {
     error: fundingError,
     mutate: mutateFundingData,
   } = useSWR(
-    `http://riseup-api.test/api/v1/funding?${
-      categorySelect ? `category_id=${categorySelect}` : "" 
-    }&${searchText ? `search=${searchText}` : ""}&${
-      sortSelect ? `sort=${sortSelect}` : ""
-    }`,
+    !clickSearch
+      ? `${process.env.NEXT_PUBLIC_API_BACKEND}/funding`
+      : `${process.env.NEXT_PUBLIC_API_BACKEND}/funding?${
+          categorySelect ? `category_id=${categorySelect}` : ""
+        }&${searchText ? `search=${searchText}` : ""}&${
+          sortSelect ? `sort=${sortSelect}` : ""
+        }`,
     fetcher
-    );
+  );
   
     
   const handleSearch = () => {
     
    // Fetch API with the selected category and search text
-   mutateFundingData();
+    mutateFundingData();
+
+
+    
  };
    if (error) {
      console.log("Error fetching funding data:", error);
@@ -42,7 +48,11 @@ function Page() {
  }
 
  if (!categoryData) {
-   return <div>Loading...</div>;
+   return (
+     <div className="flex items-center justify-center h-screen">
+       <div className="w-16 h-16 border-4 border-primary-color rounded-full animate-spin"></div>
+     </div>
+   );
   }
   
   console.log(categorySelect)
@@ -75,7 +85,7 @@ function Page() {
               </label>
               <select
                 className="border text-black border-gray-200 rounded-lg py-3 px-4 focus:outline-none w-full focus:border-primary-color"
-                onChange={(e : any) => setCategorySelect(e.target.value)}
+                onChange={(e: any) => setCategorySelect(e.target.value)}
               >
                 {categoryData.data.map((category: any) => (
                   <option key={category.id} value={category.id}>
@@ -123,7 +133,7 @@ function Page() {
                 key={funding.id}
                 title={funding.title}
                 desc={funding.fund_raise_use}
-                imageSrc={`https://freshmart.oss-ap-southeast-5.aliyuncs.com/images/images/${funding.image}`}
+                imageSrc={`${process.env.NEXT_PUBLIC_API_IMAGE}/${funding.image}`}
                 imageAlt="logo"
                 progress={calculateProgress(
                   funding.current_amount,
