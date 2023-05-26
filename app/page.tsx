@@ -54,7 +54,7 @@ const heroButtonAnimation = useSpring({
       </Head>
       <Navbar />
 
-      <main className="flex min-h-screen flex-col  md:gap-40 md:px-48  py-24 px-8 gap-20 ">
+      <main className="flex min-h-screen flex-col  md:gap-40 md:px-48  py-24 px-8 gap-20 bg-black ">
         <div className="hero grid grid-cols-1 md:grid-cols-2 gap-20 md:justify-between">
           <animated.div style={heroTextAnimation} className="hero-text">
             <h1 className="text-6xl font-bold mb-5 tracking-wide costume-line-height">

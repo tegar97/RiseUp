@@ -92,7 +92,7 @@ function Page() {
     <>
       <Navbar />
 
-      <main className="flex min-h-screen flex-col px-5 lg:px-48 py-24 relative">
+      <main className="bg-black flex min-h-screen flex-col px-5 lg:px-48 py-24 relative">
         <div className="fixed z-10 bg-white w-full flex-col  py-4 px-4 bottom-0  flex justify-between lg:hidden ">
           <input
             type="number"

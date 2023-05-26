@@ -61,7 +61,7 @@ function Page() {
     <>
       <Navbar />
 
-      <main className="flex min-h-screen flex-col gap-10 px-5 lg:px-48 py-10">
+      <main className="bg-black flex min-h-screen flex-col gap-10 px-5 lg:px-48 py-10">
         <h1 className="text-4xl font-semibold text-center costume-line-height-header">
           List of Funding
         </h1>

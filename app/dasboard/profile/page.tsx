@@ -31,7 +31,7 @@ const Page: React.FC = () => {
   return (
     <>
       <Navbar />
-      <main className="flex min-h-screen flex-col  md:gap-40 md:px-24  py-24 px-8 gap-20 ">
+      <main className="bg-black flex min-h-screen flex-col  md:gap-40 md:px-24  py-24 px-8 gap-20 ">
         <div className="flex h-screen  gap-5">
           {/* Sidebar */}
           <div className="w-1/4  rounded-xl bg-[#181819]  p-4">

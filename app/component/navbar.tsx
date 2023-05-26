@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Cookies from "js-cookie";
+import { usePathname } from "next/navigation";
+
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [session, setSession] = useState<any>(null);
@@ -10,6 +12,9 @@ export default function Navbar() {
    const handleMenuToggle = () => {
      setIsMenuOpen(!isMenuOpen);
   };
+  const pathname = usePathname();
+
+  console.log(pathname);
   
   useEffect(() => {
     //get cookie
@@ -78,20 +83,24 @@ export default function Navbar() {
       >
         <ul className="md:flex md:flex-row md:gap-5 gap-3 flex flex-col md:mt-0 mt-10">
           <li>
-            <a
-              href="#"
-              className="flex items-center flex-shrink-0  mr-6 text-primary-color text-md font-semibold"
+            <Link
+              href="/"
+              className={`flex items-center flex-shrink-0  mr-6  text-md  ${
+                pathname === "/" ? "text-primary-color" : "text-white"
+              } }`}
             >
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href="/funding"
-              className="flex items-center flex-shrink-0 text-white mr-6 text-md "
+              className={`flex items-center flex-shrink-0  mr-6  text-md  ${
+                pathname === "/funding" ? "text-primary-color" : "text-white"
+              } }`}
             >
               Funding
-            </a>
+            </Link>
           </li>
           <li>
             <a
@@ -133,33 +142,28 @@ export default function Navbar() {
           </li>
         </ul>
       </div>
-   
-         {
-        user ? (
-             <Link href={"/dasboard/profile"}>
-        
-               <span>{user.name}</span>
-      
-      </Link>
-          ) : <div className="md:flex hidden gap-4  ">
 
-     
-        {/* Register login */}
-        <Link href={"/login"}>
-          <button className="bg-transparent hover:bg-primary-color text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded">
-            Login
-          </button>
+      {user ? (
+        <Link href={"/dasboard/profile"}>
+          <span>{user.name}</span>
         </Link>
+      ) : (
+        <div className="md:flex hidden gap-4  ">
+          {/* Register login */}
+          <Link href={"/login"}>
+            <button className="bg-transparent hover:bg-primary-color text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded">
+              Login
+            </button>
+          </Link>
 
-        {/* button register */}
-        <Link href={"/register"}>
-          <button className=" hover:bg-primary-color  font-semibold hover:text-white py-2 px-4 border bg-primary-color text-black border-primary-color hover:border-transparent rounded">
-            Mulai Donasi
-          </button>
-        </Link>
-      </div>
-        }
-      
+          {/* button register */}
+          <Link href={"/register"}>
+            <button className=" hover:bg-primary-color  font-semibold hover:text-white py-2 px-4 border bg-primary-color text-black border-primary-color hover:border-transparent rounded">
+              Mulai Donasi
+            </button>
+          </Link>
+        </div>
+      )}
     </nav>
   );
 }
