@@ -41,6 +41,12 @@ Untuk membangun Riseup kita menggunakan  beberapa teknologi  seperti :
 
 ## Screenshot
 
+![alt text](https://github.com/tegar97/RiseUp/blob/38406fb8c72e786a294d00511af9e716a3577ec0/public/ss1.png?raw=true)
+![alt text](https://github.com/tegar97/RiseUp/blob/38406fb8c72e786a294d00511af9e716a3577ec0/public/ss2.png?raw=true)
+![alt text](https://github.com/tegar97/RiseUp/blob/38406fb8c72e786a294d00511af9e716a3577ec0/public/ss4.png?raw=true)
+![alt text](https://github.com/tegar97/RiseUp/blob/38406fb8c72e786a294d00511af9e716a3577ec0/public/ss3.png?raw=true)
+![alt text](https://github.com/tegar97/RiseUp/blob/38406fb8c72e786a294d00511af9e716a3577ec0/public/ss5.png?raw=true)
+
 ## Installation
 
 Wesbite Riseup telah live di : <https://rise-up-eight.vercel.app/>
