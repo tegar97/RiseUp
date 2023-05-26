@@ -27,8 +27,7 @@ RiseUp hadir untuk mendorong pertumbuhan, membangun ekosistem yang mendukung, da
 
 ### Presentasi Video
 
-Coming Soon ^_^
-
+<https://www.youtube.com/watch?v=YWrZtfYd6yc>
 ## Core Tech
 
 Untuk membangun Riseup kita menggunakan  beberapa teknologi  seperti :
