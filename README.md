@@ -1,5 +1,7 @@
 # Riseup
 
+![alt text](https://github.com/tegar97/RiseUp/blob/165ab000cba3a573b4d631a42000865ce3a530de/public/riseup.png?raw=true)
+
 ## Codespace - Orion Team
 
 - Yoga ramadhan
@@ -38,8 +40,6 @@ Untuk membangun Riseup kita menggunakan  beberapa teknologi  seperti :
 - Alibaba object storage
 
 ## Screenshot
-
-![alt text](https://github.com/hafidzfadillah/VitaFlow/blob/main/assets/images/all_ss4.jpg?raw=true)
 
 ## Installation
 
